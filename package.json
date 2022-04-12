@@ -1,0 +1,24 @@
+{
+  "name": "stock_bot",
+  "version": "1.0.0",
+  "description": "stock market price fetch with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rokerzsa/stock_bot.git"
+  },
+  "keywords": [],
+  "author": "rokerzsa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rokerzsa/stock_bot/issues"
+  },
+  "homepage": "https://github.com/rokerzsa/stock_bot#readme",
+  "dependencies": {
+    "jsdom": "^19.0.0",
+    "node-fetch": "^3.2.3"
+  }
+}
