@@ -2,7 +2,7 @@
   "name": "stock_bot",
   "version": "1.0.0",
   "description": "stock market price fetch with nodejs",
-  "main": "index.js",
+  "main": "fetch_price.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/rokerzsa/stock_bot#readme",
   "dependencies": {
+    "cron": "^1.8.2",
     "jsdom": "^19.0.0",
-    "node-fetch": "^3.2.3"
+    "node-fetch": "^2.6.7"
   }
 }
