@@ -1,13 +1,13 @@
 const fetch = require('node-fetch');
 const jsdom = require('jsdom');
 var CronJob = require('cron').CronJob;
-
-
+let db = require('./stock_db.json')
 async function fetchHTML(url){
   try{
     //access the url
     const response = await fetch(url,{
       headers: {
+        'User-Agent' : 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0',
         'Cache-Control': 'no-cache'
       }
     }
@@ -23,17 +23,32 @@ async function fetchHTML(url){
   }
 }
 function getPrice(doc){
-  const obj = doc.window.document.querySelector('#spotValue');
+  const obj1 = doc.window.document.querySelector('#nsespotval');
+  const obj2 = doc.window.document.querySelector('#bsespotval');
+  const obj3 = doc.window.document.querySelector('#spotValue');
+  let obj = obj1
+  if(obj1==null){
+    obj = obj2;
+    if(obj2==null)
+      obj = obj3;
+  }
+  else{
+    obj = obj1
+  }
   let price = obj.value;
   return price;
 }
-let key = 'NIFTY 50';
-let url = 'https://www.moneycontrol.com/indian-indices/nifty-50-9.html';
-var job = new CronJob('*/15 * * * * *', function() {
+for(let i=0;i<db.length;i++){
+  let url = db[i]["URL"];
+  console.log(db[i]["SYMBOL"])
   let ms = Date.now();
   fetchHTML(url+'?dummy'+ms).then((doc)=>{
+    const symbol = db[i]["SYMBOL"];
     const price = getPrice(doc);
-    console.log(`${key} | Price: ${price} | Date: ${ms}`);
+    console.log(`SymbolPrice: ${symbol} | Price: ${price} | Date: ${ms}`);
   });
-}, null, true, 'America/Los_Angeles');
-job.start();
+}
+// var job = new CronJob('0 */1 * * * *', function() {
+  
+// }, null, true, 'Asia/Kolkata');
+// job.start();
